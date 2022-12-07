@@ -1,0 +1,39 @@
+version: "[%compose_version%]"
+services:
+  [%builder%]:
+    environment:[% FOREACH env IN builder_env_list %]
+      - [% env %][% END %]
+    ulimits:
+        nofile:
+          soft: 26677
+          hard: 46677
+    build: ./builder/
+    depends_on:
+      - [%scheduler%]
+    volumes:[% FOREACH volume IN builder_volumes %]
+      - [% volume %][% END %]
+    deploy:
+      resources:
+        limits:
+          cpus: '[%worker_cpu_core_limit%]'
+          memory: '[%worker_cpu_core_ram_limit%]'
+      restart_policy:
+        condition: on-failure
+      replicas: [%worker_quantity%]
+  [%scheduler%]:
+    build: ./scheduler/
+    ulimits:
+        nofile:
+          soft: 26677
+          hard: 46677
+    environment:[% FOREACH env IN scheduler_env_list %]
+      - [% env %][% END %]
+    volumes:[% FOREACH volume IN scheduler_volumes %]
+      - [% volume %][% END %]
+volumes:
+  builder-config:
+    external: true
+  build_results:
+    external: true
+  rpm_sources:
+    external: true

@@ -1,0 +1,18 @@
+{
+  "builder_perl_libs":"/usr/local/lib64/perl5/Builder/",
+  "build_dir":"%(echo $HOME)/rpmbuild",
+  "builder_config_dir" : "etc",
+  "builder_env_list": [ 
+                "rpm_sources=/mnt/rpm_sources",
+                "conf_dir=/mnt/builder-config",
+                "result_dir=/mnt/build_results"
+              ],
+  "builder_volumes": [ 
+                "build_results:/mnt/build_results",
+                "rpm_sources:/mnt/rpm_sources",
+                "builder-config:/mnt/builder-config"
+              ],
+  "worker_quantity":"4",
+  "worker_cpu_core_limit":"3",
+  "worker_cpu_core_ram_limit":"1G"
+}

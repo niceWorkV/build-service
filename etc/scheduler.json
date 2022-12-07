@@ -1,0 +1,19 @@
+{
+   "scheduler_volumes" : [
+      "/home/vadym/my_projects/thesises/test-mag/scheduler/bin/:/home/test",
+      "/home/vadym/my_projects/thesises/test-mag/builds/sources:/mnt/sources",
+      "/home/vadym/my_projects/thesises/test-mag/builds/RPMs:/mnt/RPMs",
+      "rpm_sources:/mnt/rpm_sources",
+      "build_results:/mnt/build_results"
+   ],
+   "scheduler_env_list" : [
+      "rpm_sources=/mnt/rpm_sources",
+      "PERL_MM_USE_DEFAULT=1",
+      "host_sources=/mnt/sources",
+      "source_dir=/mnt/rpm_sources",
+      "conf_dir=/mnt/builder-config",
+      "result_dir=/mnt/build_results"
+   ],
+   "scheduler_perl_libs" : "/usr/local/lib64/perl5/scheduler/",
+   "scheduler_config_dir" : "etc"
+}

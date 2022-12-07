@@ -1,0 +1,17 @@
+[epel-oracle]
+name=epel_oracle
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL7/developer_EPEL/x86_64/
+gpgcheck=0
+enabled=1
+
+[base-optional]
+name=base-optional
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL7/optional/latest/x86_64/
+gpgcheck=0
+enabled=1
+
+[base-latest]
+name=base-latest
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL7/latest/x86_64/
+gpgcheck=0
+enabled=1

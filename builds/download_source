@@ -1,0 +1,10 @@
+tmpname=t1
+dirname=$2
+pushd ./sources/
+mkdir $dirname
+pushd $dirname
+wget -O $tmpname $1
+rpm2cpio ./$tmpname | cpio -idmv 
+rm $tmpname
+popd
+popd

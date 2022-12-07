@@ -1,0 +1,30 @@
+From [%image%]
+
+ARG perl_libs="[%scheduler_perl_libs%]"
+ARG bins="[%bins%]"
+ARG libs="[%libs%]"
+ARG bash_libs="[%bash_libs%]"
+
+RUN \
+    yum clean all && rm -f /etc/yum.repos.d/* ;
+COPY \
+    [%scheduler_config_dir%]/oracle.repo /etc/yum.repos.d/
+RUN \
+    yum -y install perl perl-Config-IniFiles perl-CPAN ; \
+    yum -y install rsync
+
+RUN \
+    mkdir -p $perl_libs ;\
+    mkdir -p $bash_libs
+
+RUN \
+   yum -y install perl-App-cpanminus; \
+   cpanm List/Uniq.pm
+COPY \
+    lib/perl_libs $perl_libs
+COPY \
+    lib/bash_libs $bash_libs
+COPY \
+    bin $bins
+
+ENTRYPOINT ["/home/bin/init.sh"]

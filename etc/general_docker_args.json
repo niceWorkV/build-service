@@ -1,0 +1,6 @@
+{
+  "image":"centos:centos7.6.1810",
+  "bins":"/home/bin",
+  "libs":"/home/libs",
+  "bash_libs":"${libs}/bash_libs"
+}

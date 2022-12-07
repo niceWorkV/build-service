@@ -1,0 +1,32 @@
+From [%image%]
+
+ARG perl_libs="[%builder_perl_libs%]"
+ARG bins="[%bins%]"
+ARG libs="[%libs%]"
+ARG bash_libs="[%bash_libs%]"
+
+RUN \
+    yum clean all && rm -f /etc/yum.repos.d/*
+COPY \
+    [%builder_config_dir%]/oracle.repo /etc/yum.repos.d/
+RUN \
+    yum -y install @buildsys-build rpmdevtools mock
+
+RUN \
+    yum -y install perl-Config-IniFiles rsync
+
+RUN \
+    mkdir -p $perl_libs ;\
+    mkdir -p $bash_libs
+COPY \
+    lib/perl_libs $perl_libs
+COPY \
+    lib/bash_libs $bash_libs
+COPY \
+    bin $bins
+
+RUN \
+    echo '%_topdir [%build_dir%]' > ~/.rpmmacros; \
+    rpmdev-setuptree
+
+ENTRYPOINT ["/home/bin/build.sh"]
